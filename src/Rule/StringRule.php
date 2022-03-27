@@ -13,4 +13,9 @@ class StringRule extends AbstractRule
     {
         return 'The value is not string';
     }
+
+    public function getRuleName()
+    {
+        // TODO: Implement getRuleName() method.
+    }
 }

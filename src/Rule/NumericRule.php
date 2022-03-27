@@ -13,4 +13,9 @@ class NumericRule extends AbstractRule
     {
         return 'The value is not numeric';
     }
+
+    public function getRuleName()
+    {
+        // TODO: Implement getRuleName() method.
+    }
 }

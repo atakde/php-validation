@@ -14,5 +14,11 @@
         }
     ],
     "minimum-stability": "stable",
-    "require": {}
+    "require": {
+        "phpunit/phpunit": "^5.7.27"
+    },
+    "scripts": {
+        "test": "./vendor/bin/phpunit",
+        "coverage": "vendor/bin/phpunit --coverage-html coverage"
+    }
 }

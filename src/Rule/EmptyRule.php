@@ -13,4 +13,9 @@ class EmptyRule extends AbstractRule
     {
         return 'The value is empty';
     }
+
+    public function getRuleName()
+    {
+        // TODO: Implement getRuleName() method.
+    }
 }

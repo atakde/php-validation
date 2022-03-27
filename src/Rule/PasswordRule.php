@@ -3,7 +3,7 @@
 namespace Atakde\PhpValidation\Rule;
 
 /**
- * ^: anchored to beginning of string
+ *^: anchored to beginning of string
  *\S*: any set of characters
  *(?=\S{8,}): of at least length 8
  *(?=\S*[a-z]): containing at least one lowercase letter
@@ -22,5 +22,10 @@ class PasswordRule extends AbstractRule
     public function getMessage()
     {
         return 'The value is not a valid password';
+    }
+
+    public function getRuleName()
+    {
+        // TODO: Implement getRuleName() method.
     }
 }

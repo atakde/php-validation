@@ -3,7 +3,6 @@
 namespace Atakde\PhpValidation;
 
 use Atakde\PhpValidation\Exception\InvalidRuleException;
-use Exception;
 
 class Validator
 {
@@ -21,27 +20,49 @@ class Validator
         ];
     }
 
-    public function validate($fields, $value)
+    public function validate($rules, $params)
     {
-        try {
-            foreach ($fields as $field => $rules) {
-                $rules = explode('|', $rules);
+        foreach ($rules as $ruleField => $ruleString) {
 
-                foreach ($rules as $rule) {
-                    if (isset($this->validators[$rule])) {
-                        if (!$this->validators[$rule]->check($value)) {
-                            $this->errors[$field][] = $this->validators[$rule]->getMessage();
-                        }
-                    } else {
-                        throw new InvalidRuleException('Rule ' . $rule . ' is not defined');
+            if (!isset($params[$ruleField])) {
+                $this->errors[$ruleField][] = 'The field ' . $ruleField . ' is not exists.';
+                continue;
+            }
+
+            $ruleArray = explode('|', $ruleString);
+
+            foreach ($ruleArray as $rule) {
+
+                if (isset($this->validators[$rule])) {
+                    if (!$this->validators[$rule]->check($params[$ruleField])) {
+                        $this->errors[$ruleField][] = $this->validators[$rule]->getMessage();
                     }
+                } else {
+                    throw new InvalidRuleException('Rule ' . $rule . ' is not defined');
                 }
             }
-        } catch (Exception $e) {
-            echo $e->getMessage();
-            return false;
         }
+    }
 
-        return empty($this->errors);
+    public function fails()
+    {
+        return count($this->errors) > 0;
+    }
+
+    public function passes()
+    {
+        return count($this->errors) === 0;
+    }
+
+    public function getErrors()
+    {
+        return $this->errors;
+    }
+
+    public function setRule(Rule\AbstractRule $rule)
+    {
+        if (!isset($this->validators[$rule->getRuleName()])) {
+            $this->validators[] = $rule;
+        }
     }
 }

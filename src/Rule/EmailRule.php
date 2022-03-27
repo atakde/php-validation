@@ -13,4 +13,9 @@ class EmailRule extends AbstractRule
     {
         return 'The value is not a valid email';
     }
+
+    public function getRuleName()
+    {
+        // TODO: Implement getRuleName() method.
+    }
 }
