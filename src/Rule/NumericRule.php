@@ -4,6 +4,8 @@ namespace Atakde\PhpValidation\Rule;
 
 class NumericRule extends AbstractRule
 {
+    private $ruleName = 'numeric';
+
     public function check($value)
     {
         return is_numeric($value);
@@ -16,6 +18,6 @@ class NumericRule extends AbstractRule
 
     public function getRuleName()
     {
-        // TODO: Implement getRuleName() method.
+        return $this->ruleName;
     }
 }

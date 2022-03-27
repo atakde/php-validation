@@ -3,6 +3,12 @@
 require 'vendor/autoload.php';
 
 use Atakde\PhpValidation\Exception\InvalidRuleException;
+use Atakde\PhpValidation\Rule\AbstractRule;
+use Atakde\PhpValidation\Rule\EmailRule;
+use Atakde\PhpValidation\Rule\EmptyRule;
+use Atakde\PhpValidation\Rule\NumericRule;
+use Atakde\PhpValidation\Rule\PasswordRule;
+use Atakde\PhpValidation\Rule\StringRule;
 use Atakde\PhpValidation\Validator;
 use PHPUnit\Framework\TestCase;
 
@@ -106,9 +112,28 @@ final class ValidatorTest extends TestCase
     }
 
     /**
-     * We are checking setRule() method.
+     * Mocking a rule then checking if the rule is added to the validator
      */
     public function testSetRule()
     {
+        $stub = $this->getMockForAbstractClass(AbstractRule::class);
+
+        $stub->expects($this->any())
+            ->method('check')
+            ->with('my test string')
+            ->will($this->returnValue(true));
+
+        $stub->expects($this->any())
+            ->method('getMessage')
+            ->will($this->returnValue(true));
+
+        $stub->expects($this->any())
+            ->method('getRuleName')
+            ->will($this->returnValue('myRuleName'));
+
+        $stub->ruleName = 'myRuleName';
+        $this->validator->setRule($stub);
+
+        $this->assertArrayHasKey('myRuleName', $this->validator->getValidators(), "Validators has not have myRuleName");
     }
 }

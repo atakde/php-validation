@@ -59,10 +59,15 @@ class Validator
         return $this->errors;
     }
 
+    public function getValidators()
+    {
+        return $this->validators;
+    }
+
     public function setRule(Rule\AbstractRule $rule)
     {
         if (!isset($this->validators[$rule->getRuleName()])) {
-            $this->validators[] = $rule;
+            $this->validators[$rule->getRuleName()] = $rule;
         }
     }
 }

@@ -4,6 +4,8 @@ namespace Atakde\PhpValidation\Rule;
 
 class StringRule extends AbstractRule
 {
+    private $ruleName = 'string';
+
     public function check($value)
     {
         return is_string($value);
@@ -16,6 +18,6 @@ class StringRule extends AbstractRule
 
     public function getRuleName()
     {
-        // TODO: Implement getRuleName() method.
+        return $this->ruleName;
     }
 }

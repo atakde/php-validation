@@ -14,6 +14,8 @@ namespace Atakde\PhpValidation\Rule;
 
 class PasswordRule extends AbstractRule
 {
+    private $ruleName = 'password';
+
     public function check($value)
     {
         return preg_match('/^\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$/', $value);
@@ -26,6 +28,6 @@ class PasswordRule extends AbstractRule
 
     public function getRuleName()
     {
-        // TODO: Implement getRuleName() method.
+        return $this->ruleName;
     }
 }

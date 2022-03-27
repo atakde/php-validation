@@ -4,6 +4,8 @@ namespace Atakde\PhpValidation\Rule;
 
 class EmailRule extends AbstractRule
 {
+    private $ruleName = 'email';
+
     public function check($value)
     {
         return filter_var($value, FILTER_VALIDATE_EMAIL);
@@ -16,6 +18,6 @@ class EmailRule extends AbstractRule
 
     public function getRuleName()
     {
-        // TODO: Implement getRuleName() method.
+        return $this->ruleName;
     }
 }

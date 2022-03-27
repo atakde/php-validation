@@ -4,6 +4,8 @@ namespace Atakde\PhpValidation\Rule;
 
 class EmptyRule extends AbstractRule
 {
+    private $ruleName = 'empty';
+
     public function check($value)
     {
         return !empty($value);
@@ -16,6 +18,6 @@ class EmptyRule extends AbstractRule
 
     public function getRuleName()
     {
-        // TODO: Implement getRuleName() method.
+        return $this->ruleName;
     }
 }
