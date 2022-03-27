@@ -93,7 +93,7 @@ final class ValidatorTest extends TestCase
     }
 
     /**
-     * We are checking get Errors method
+     * We are checking getErrors() method
      */
     public function testGetErrors()
     {
@@ -106,15 +106,9 @@ final class ValidatorTest extends TestCase
     }
 
     /**
-     * We are checking get Errors method
+     * We are checking setRule() method.
      */
     public function testSetRule()
     {
-        $this->validator->validate(['myInput' => 'numeric'], ['myInput' => 'my test string']);
-        $this->assertEquals($this->validator->getErrors(), [
-            'myInput' => [
-                'The value is not numeric'
-            ]
-        ]);
     }
 }
