@@ -16,25 +16,19 @@ class Validator
             'numeric' => new Rule\NumericRule(),
             'string' => new Rule\StringRule(),
             'email' => new Rule\EmailRule(),
-            'password' => new Rule\PasswordRule()
+            'password' => new Rule\PasswordRule(),
+            'required' => new Rule\RequiredRule(),
         ];
     }
 
     public function validate($rules, $params)
     {
         foreach ($rules as $ruleField => $ruleString) {
-
-            if (!isset($params[$ruleField])) {
-                $this->errors[$ruleField][] = 'The field ' . $ruleField . ' is not exists.';
-                continue;
-            }
-
             $ruleArray = explode('|', $ruleString);
-
             foreach ($ruleArray as $rule) {
-
                 if (isset($this->validators[$rule])) {
-                    if (!$this->validators[$rule]->check($params[$ruleField])) {
+                    $checkValue = isset($params[$ruleField]) ? $params[$ruleField] : null; // test fail if not doing this for now.
+                    if (!$this->validators[$rule]->check($checkValue)) {
                         $this->errors[$ruleField][] = $this->validators[$rule]->getMessage();
                     }
                 } else {

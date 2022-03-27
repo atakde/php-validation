@@ -2,18 +2,18 @@
 
 namespace Atakde\PhpValidation\Rule;
 
-class EmptyRule extends AbstractRule
+class RequiredRule extends AbstractRule
 {
-    private $ruleName = 'empty';
+    private $ruleName = 'required';
 
     public function check($value)
     {
-        return empty($value);
+        return isset($value);
     }
 
     public function getMessage()
     {
-        return 'The value is empty';
+        return 'The value is required';
     }
 
     public function getRuleName()
