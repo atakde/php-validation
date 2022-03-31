@@ -19,7 +19,7 @@ final class ParameterizedTest extends TestCase
      */
     public function testAdd($params, $rules)
     {
-        $this->validator->validate(['myInput' => 'string'], ['myInput' => 'my string']); // giving a string value
+        $this->validator->validate($params, $rules); // giving a string value
         $this->assertTrue($this->validator->passes());
     }
 
