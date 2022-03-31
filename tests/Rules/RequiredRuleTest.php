@@ -17,9 +17,9 @@ final class RequiredRuleTest extends TestCase
     /**
      * Check required rule is working or not
      */
-    public function testEmptyRule()
+    public function testRequiredRule()
     {
-        $this->validator->validate(['myInput' => 'required'], ['myInput' => '']); // giving an the input value in array
+        $this->validator->validate(['myInput' => 'required'], ['myInput' => '']); // giving correct params
         $this->assertTrue($this->validator->passes());
 
         $this->validator->validate(['myInput' => 'required'], []); // sending an empty array

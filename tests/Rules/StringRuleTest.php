@@ -17,7 +17,7 @@ final class StringRuleTest extends TestCase
     /**
      * Check string rule is working or not
      */
-    public function testEmptyRule()
+    public function testStringRule()
     {
         $this->validator->validate(['myInput' => 'string'], ['myInput' => 'my string']); // giving a string value
         $this->assertTrue($this->validator->passes());

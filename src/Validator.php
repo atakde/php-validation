@@ -1,7 +1,6 @@
 <?php
 
 namespace Atakde\PhpValidation;
-
 use Atakde\PhpValidation\Exception\InvalidRuleException;
 
 class Validator
@@ -27,7 +26,7 @@ class Validator
             $ruleArray = explode('|', $ruleString);
             foreach ($ruleArray as $rule) {
                 if (isset($this->validators[$rule])) {
-                    $checkValue = isset($params[$ruleField]) ? $params[$ruleField] : null; // test fail if not doing this for now.
+                    $checkValue = isset($params[$ruleField]) ? $params[$ruleField] : null;
                     if (!$this->validators[$rule]->check($checkValue)) {
                         $this->errors[$ruleField][] = $this->validators[$rule]->getMessage();
                     }
