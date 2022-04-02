@@ -16,7 +16,7 @@ class PasswordRule extends AbstractRule
 {
     private $ruleName = 'password';
 
-    public function check($value)
+    public function check($value, $params = null)
     {
         return preg_match('/^\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$/', $value);
     }

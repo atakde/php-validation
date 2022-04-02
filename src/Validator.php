@@ -1,6 +1,7 @@
 <?php
 
 namespace Atakde\PhpValidation;
+
 use Atakde\PhpValidation\Exception\InvalidRuleException;
 
 class Validator
@@ -17,6 +18,8 @@ class Validator
             'email' => new Rule\EmailRule(),
             'password' => new Rule\PasswordRule(),
             'required' => new Rule\RequiredRule(),
+            'max' => new Rule\MaxRule(),
+            'min' => new Rule\MinRule()
         ];
     }
 
@@ -25,16 +28,31 @@ class Validator
         foreach ($rules as $ruleField => $ruleString) {
             $ruleArray = explode('|', $ruleString);
             foreach ($ruleArray as $rule) {
-                if (isset($this->validators[$rule])) {
+                $ruleSettings = $this->parseRule($rule);
+
+                if (isset($this->validators[$ruleSettings['rule']])) {
                     $checkValue = isset($params[$ruleField]) ? $params[$ruleField] : null;
-                    if (!$this->validators[$rule]->check($checkValue)) {
-                        $this->errors[$ruleField][] = $this->validators[$rule]->getMessage();
+
+                    if (!$this->validators[$ruleSettings['rule']]->check($checkValue, $ruleSettings['params'])) {
+                        $this->errors[$ruleField][] = $this->validators[$ruleSettings['rule']]->getMessage();
                     }
                 } else {
                     throw new InvalidRuleException('Rule ' . $rule . ' is not defined');
                 }
             }
         }
+    }
+
+    private function parseRule($rule)
+    {
+        $ruleSettings = explode(':', $rule);
+        $ruleName = $ruleSettings[0];
+        $ruleParams = isset($ruleSettings[1]) ? $ruleSettings[1] : null;
+
+        return [
+            'rule' => $ruleName,
+            'params' => [$ruleParams]
+        ];
     }
 
     public function fails()

@@ -6,7 +6,7 @@ class EmailRule extends AbstractRule
 {
     private $ruleName = 'email';
 
-    public function check($value)
+    public function check($value, $params = null)
     {
         return filter_var($value, FILTER_VALIDATE_EMAIL);
     }

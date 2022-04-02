@@ -6,7 +6,7 @@ class RequiredRule extends AbstractRule
 {
     private $ruleName = 'required';
 
-    public function check($value)
+    public function check($value, $params = null)
     {
         return isset($value);
     }

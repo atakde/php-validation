@@ -2,18 +2,18 @@
 
 namespace Atakde\PhpValidation\Rule;
 
-class EmptyRule extends AbstractRule
+class MaxRule extends AbstractRule
 {
-    private $ruleName = 'empty';
+    private $ruleName = 'max';
 
     public function check($value, $params = null)
     {
-        return empty($value);
+        return strlen($value) <= $params[0];
     }
 
     public function getMessage()
     {
-        return 'The value is empty';
+        return 'max rule is not valid';
     }
 
     public function getRuleName()

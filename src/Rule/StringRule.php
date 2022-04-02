@@ -6,7 +6,7 @@ class StringRule extends AbstractRule
 {
     private $ruleName = 'string';
 
-    public function check($value)
+    public function check($value, $params = null)
     {
         return is_string($value);
     }

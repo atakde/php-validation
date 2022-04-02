@@ -6,7 +6,7 @@ class NumericRule extends AbstractRule
 {
     private $ruleName = 'numeric';
 
-    public function check($value)
+    public function check($value, $params = null)
     {
         return is_numeric($value);
     }

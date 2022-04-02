@@ -2,18 +2,18 @@
 
 namespace Atakde\PhpValidation\Rule;
 
-class EmptyRule extends AbstractRule
+class MinRule extends AbstractRule
 {
-    private $ruleName = 'empty';
+    private $ruleName = 'min';
 
     public function check($value, $params = null)
     {
-        return empty($value);
+        return strlen($value) >= $params[0];
     }
 
     public function getMessage()
     {
-        return 'The value is empty';
+        return 'min rule is not valid';
     }
 
     public function getRuleName()
